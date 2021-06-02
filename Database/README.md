@@ -1,6 +1,6 @@
 <h2>Схема БД</h2>
 
-<img src="./bd_scheme.png">
+<img src="https://github.com/ShabanovR/web_project/blob/main/Database/db_scheme.png">
 
 <section>
     <table>
