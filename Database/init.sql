@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
     `text` TEXT,
     `status_id` INT UNSIGNED NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
+    `deleted` BOOLEAN DEFAULT 0,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`type_id`) REFERENCES `task_types` (`id`)
         ON DELETE RESTRICT
@@ -47,13 +48,13 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 
 
 INSERT `task_types` (`id`, `name`) VALUES
-(1, 'meeting'),
-(2, 'call'),
-(3, 'conference'),
-(4, 'business');
+(1, 'Meeting'),
+(2, 'Call'),
+(3, 'Conference'),
+(4, 'Business');
 
 
 INSERT `task_statuses` (`id`, `name`) VALUES
-(1, 'current'),
-(2, 'completed'),
-(3, 'cancelled');
+(1, 'Current'),
+(2, 'Completed'),
+(3, 'Cancelled');
