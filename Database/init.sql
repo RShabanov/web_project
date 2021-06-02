@@ -44,3 +44,15 @@ CREATE TABLE IF NOT EXISTS `tasks` (
         ON UPDATE CASCADE
 );
 
+
+INSERT `task_types` (`id`, `name`) VALUES
+(1, 'meeting'),
+(2, 'call'),
+(3, 'conference'),
+(4, 'business');
+
+
+INSERT `task_statuses` (`id`, `name`) VALUES
+(1, 'current'),
+(2, 'completed'),
+(3, 'cancelled');
