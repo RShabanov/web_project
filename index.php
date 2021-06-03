@@ -4,6 +4,14 @@
 // <input type="datetime-local" >
 // <input type="time">
 
+spl_autoload_register(function($class) {
+    $path = str_replace('\\', '/', $class) . '.php';
+    if (file_exists($path)) {
+        require_once $path;
+    }
+});
+
+
 use App\Components\Router;
 
 
@@ -12,9 +20,6 @@ error_reporting(E_ALL);
 
 
 define('ROOT', dirname(__FILE__));
-require_once ROOT . '/App/Components/Router.php';
-require_once ROOT . '/App/Controllers/BaseController.php';
-require_once ROOT . '/App/Models/BaseModel.php';
 
 
 $router = new Router;

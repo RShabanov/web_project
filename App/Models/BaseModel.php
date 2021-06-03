@@ -100,7 +100,7 @@ class BaseModel {
         return !empty($this->errors);
     }
 
-    public function get_db() {
+    public static function get_db() {
         require_once ROOT . '/App/Database/Database.php';
         return Database::get_pdo();
     }

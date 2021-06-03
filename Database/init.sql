@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
     `location` VARCHAR(255),
     `time` TIMESTAMP NOT NULL,
     `duration` TIME NOT NULL DEFAULT '10000',
-    `text` TEXT,
+    `comment` TEXT,
     `status_id` INT UNSIGNED NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
     `deleted` BOOLEAN DEFAULT 0,

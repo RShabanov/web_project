@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Views\View;
+
 
 class Response {
     protected $request;
@@ -16,5 +18,10 @@ class Response {
 
     public function get_back() {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+    public function view($template, $data) {
+        header('Content-Type: text/html; charset=utf-8');
+        View::view($template, $data);
     }
 }

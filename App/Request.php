@@ -15,6 +15,8 @@ class Request {
 
         $this->get_data = $_GET;
         $this->post_data = $_POST;
+        
+        echo 'Request contructor<br>';
     }
 
     public function get($variable = null, $default = null) {

@@ -30,16 +30,16 @@ class Router {
                 $controller_file = ROOT . '/App/Controllers/' . $controller_name . '.php';
                 $controller_name = 'App\Controllers\\' . $controller_name;
 
+                echo 'Class: ' . $controller_name . '<br>';
+                echo 'Action: ' . $action_name . '<br>';
+                echo 'File: ' . $controller_file . '<br><br>';
+
                 if (file_exists($controller_file)) {
-                    require_once $controller_file;
+                    $request = new Request;
+
+                    $controller = new $controller_name($request);
+                    $controller->$action_name();
                 }
-                
-                require_once ROOT . '/App/Request.php';
-                $request = new Request;
-                
-                $controller = new $controller_name($request);
-                $controller->$action_name();
-                
                 break;
             }
         }

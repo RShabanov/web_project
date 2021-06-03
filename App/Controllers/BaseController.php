@@ -8,7 +8,7 @@ use App\Request;
 class BaseController {
     protected $request;
 
-    public function __contruct(Request $request) {
+    public function __construct(Request $request) {
         $this->request = $request;
     }
 
