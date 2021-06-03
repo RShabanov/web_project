@@ -1,8 +1,5 @@
 <?php
 
-// for view
-// <input type="datetime-local" >
-// <input type="time">
 
 spl_autoload_register(function($class) {
     $path = str_replace('\\', '/', $class) . '.php';
@@ -20,7 +17,6 @@ error_reporting(E_ALL);
 
 
 define('ROOT', dirname(__FILE__));
-
 
 $router = new Router;
 $router->run();

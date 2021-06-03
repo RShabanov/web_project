@@ -1,6 +1,6 @@
 <div>
     <dialog class="task-dialog" open>
-        <form action="" class="task-form">
+        <form action="/" method='POST' class="task-form">
             <div class="form-group">
                 <label class="form__field-label">
                     <span class="field-label__title">Task:</span>
@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label class="form__field-label">
                     <span class="field-label__title">Location:</span>
-                    <input type="text" name="location" class="form__field-input" required autocomplete="off">
+                    <input type="text" name="location" class="form__field-input" autocomplete="off">
                 </label>
             </div>
 

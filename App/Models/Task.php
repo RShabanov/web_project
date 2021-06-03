@@ -4,6 +4,8 @@ namespace App\Models;
 
 use PDO;
 
+use App\Session;
+
 
 class Task extends BaseModel {
     private static $types_table = 'task_types';
@@ -20,7 +22,7 @@ class Task extends BaseModel {
         'location',
         'time',
         'duration',
-        'text',
+        'comment',
         'status_id',
         'user_id',
         'deleted'
@@ -28,14 +30,29 @@ class Task extends BaseModel {
 
     public $name, $type_id,
         $location, $time, 
-        $duration, $text, 
-        $status_id, $user_id, $deleted = false;
+        $duration, $comment, 
+        $status_id = 1, 
+        $deleted = false;
 
     protected static $table = 'tasks';
 
-    public function is_valid() {
+    protected function is_valid() {
         if (parent::is_valid()) {
-            # code...
+            if (empty($this->name)) {
+                $this->errors['name'] = 'Task name cannot be empty';
+            }
+            if (empty($this->type_id)) {
+                $this->errors['type_id'] = 'There must be any task type';
+            }
+            if (empty($this->time)) {
+                $this->errors['time'] = 'Task must have date and time';
+            }
+            if (empty($this->duration)) {
+                $this->errors['duration'] = 'Task must have duration';
+            }
+            if (empty($this->time)) {
+                $this->errors['time'] = 'Task must have date and time';
+            }
             
             return !$this->has_errors();
         }

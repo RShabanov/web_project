@@ -4,6 +4,8 @@ namespace App\Components;
 
 use App\Request;
 
+use App\Session;
+
 
 class Router {
     private $routes = [];
@@ -13,16 +15,12 @@ class Router {
         $this->routes = require($routes_path);
     }
 
-    private function get_URI() {
-        if (!empty($_SERVER['REQUEST_URI']))
-            return trim($_SERVER['REQUEST_URI'], '/');
-    }
-
     public function run() {
-        $uri = $this->get_URI();
+        $uri = $_SERVER['REQUEST_URI'];
+        $redirect = true;
 
         foreach ($this->routes as $uri_pattern => $path) {
-            if (preg_match("~$uri_pattern~", $uri)) {
+            if (preg_match("~^$uri_pattern$~", $uri)) {
 
                 $controller_name = ucfirst($path['controller']) . 'Controller';
                 $action_name = 'action_' . $path['action'];
@@ -37,11 +35,20 @@ class Router {
                 if (file_exists($controller_file)) {
                     $request = new Request;
 
+                    echo 'Request method: ' . $request->method() . '<br>';
+                    echo '$_SERVER[REQUEST_METHOD]: ' . $_SERVER['REQUEST_METHOD'] . '<br>';
+
                     $controller = new $controller_name($request);
                     $controller->$action_name();
+                    
+                    $redirect = false;
                 }
                 break;
             }
         }
+
+        // if user enter any garbage into URI
+        if ($redirect)
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/tasks/list');
     }
 }

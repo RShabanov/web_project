@@ -13,7 +13,7 @@ class BaseModel {
 
     protected $errors = [];
 
-    private function is_valid() {
+    protected function is_valid() {
         return isset($this->table) && isset($this->id);
     }
 
@@ -107,8 +107,17 @@ class BaseModel {
 
     public function fill($array) {
         foreach (static::$attributes as $attribute) {
-            $this->$attribute = array_get($array, $attribute);
+            $this->$attribute = $this->array_get($array, $attribute);
         }
+    }
+
+    private function array_get($array, $key, $default = '') {
+        $array = (array)$array;
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        return $default;
     }
 
 }

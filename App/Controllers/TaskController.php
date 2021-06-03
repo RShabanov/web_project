@@ -11,7 +11,7 @@ class TaskController extends BaseController {
     public function action_show() {
         echo 'TaskController -> action_show()<br>';
         $task = new Task;
-        return $this->response()->view('show', compact('task'));
+        return $this->response()->view('all_tasks', compact('task'));
     }
 
     public function action_index($id) {
@@ -36,5 +36,9 @@ class TaskController extends BaseController {
 
     public function action_add() {
         
+    }
+
+    public function action_update() {
+
     }
 }

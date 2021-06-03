@@ -9,14 +9,12 @@ class Request {
             $url = '',
             $method = 'GET';
 
-    public function __contruct() {
+    public function __construct() {
         $this->url = $_SERVER['REQUEST_URI'];
         $this->method = $_SERVER['REQUEST_METHOD'];
 
         $this->get_data = $_GET;
         $this->post_data = $_POST;
-        
-        echo 'Request contructor<br>';
     }
 
     public function get($variable = null, $default = null) {
