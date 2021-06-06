@@ -13,7 +13,7 @@ class Response {
     }
 
     public function redirect(string $path) {
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/' . $page_path);
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/' . $path);
     }
 
     public function get_back() {

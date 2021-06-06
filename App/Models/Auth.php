@@ -27,14 +27,18 @@ class Auth extends BaseModel {
 
     public function match() {
         if (!empty($this->name) && !empty($this->password)) {
-            $passw_hash = password_hash($this->password, PASSWORD_DEFAULT);
+            $set = [
+                ':name' => $this->name
+            ];
 
-            $sql = static::get_db()->prepare('SELECT * FROM `' . static::$table . '` LIMIT 1;');
-            if ($sql->execute()) {
+            $sql = static::get_db()->prepare('SELECT * FROM `' . static::$table . '` WHERE `name`=:name LIMIT 1;');
+            if ($sql->execute($set)) {
                 $user = $sql->fetch(PDO::FETCH_ASSOC);
                 if (!empty($user)) {
-                    $this->user_id = intval($user['id']);
-                    return true;
+                    if (password_verify($this->password, $user['password'])) {
+                        $this->user_id = intval($user['id']);
+                        return true;
+                    }
                 }
             }
         }

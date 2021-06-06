@@ -1,7 +1,7 @@
 <h1>AUTH</h1>
 
 <div class="auth-form-block">
-    <form action="/" method='POST' class="auth-form">
+    <form action="" method='POST' class="auth-form">
         <div class="form-group">
             <label class="form__field-label">
                 <span class="field-label__title">Name:</span>

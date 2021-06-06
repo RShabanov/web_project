@@ -8,7 +8,7 @@ class Session {
     protected static $session_started = false;
 
     protected static function start_session() {
-        if ( ! static::$session_started) {
+        if (!static::$session_started) {
             session_start();
             static::$session_started = true;
         }
@@ -40,12 +40,20 @@ class Session {
     }
 
     public static function authorize($user_id) {
+        static::start_session();
+
         static::set('authorized', true);
         static::set('user_id', $user_id);
     }
 
     public static function is_authorized() {
-        return null !== static::get('authorized');
+        static::start_session();
+        return !empty(static::get('authorized'));
+    }
+
+    public static function finish_session() {
+        static::session_unset();
+        static::session_abort();
     }
 
 }

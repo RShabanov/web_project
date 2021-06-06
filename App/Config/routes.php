@@ -2,8 +2,8 @@
 
 return array(
     '/' => [
-        'controller' => 'auth',
-        'action' => 'login'
+        'controller' => 'task',
+        'action' => 'show'
     ],
     '/tasks/list' => [
         'controller' => 'task',
