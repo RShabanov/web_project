@@ -12,7 +12,7 @@
                 <label class="form__field-label">
                     <span class="field-label__title">Type:</span>
                     <select name="type_id" class="form__field-select" require>
-                        <?php foreach($task->get_types() as $index => $type): ?>
+                        <?php foreach(App\Models\Task::get_types() as $index => $type): ?>
                             <option value="<?= $index; ?>" class="field-select__option" <?= (empty($task->type_id) ? '' : 'checked'); ?> >
                                 <?= $type; ?>
                             </option>

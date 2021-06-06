@@ -6,7 +6,7 @@
 }
 
 
-.task-list-form {
+.ls-task-list-form {
     width: 80%;
     margin: auto;
 
@@ -15,21 +15,21 @@
     border-bottom: none;
 }
 
-.form-group {
+.ls-form-group {
     position: relative;
     height: 45px;
 }
 
-.form-group:nth-child(even) {
+.ls-form-group:nth-child(even) {
     background-color: #eaeaea;
 }
 
-.form-group--header {
+.ls-form-group--header {
     background-color: #cfcfcf;
     font-weight: bold;
 }
 
-.form-group--item {
+.ls-form-group--item {
     list-style-type: none;
 
     display: flex;
@@ -44,7 +44,7 @@
     height: 100%;
 }
 
-.form-group--item .group--item-field {
+.ls-form-group--item .ls-group--item-field {
     height: 45px;
     position: relative;
 
@@ -57,29 +57,29 @@
     text-overflow: ellipsis;
 }
 
-.form-group--item > .select-field {
+.ls-form-group--item > .ls-select-field {
     width: 4em;
     text-align: center;
     padding-left: 0;
 }
 
-.form-group--item > .select-field > input {
+.ls-form-group--item > .ls-select-field > input {
     cursor: pointer;
 }
 
-.form-group--item > .type-field {
+.ls-form-group--item > .ls-type-field {
     width: 10%;
 }
 
-.form-group--item > .task_name-field {
+.ls-form-group--item > .ls-task_name-field {
     width: 50%;
 }
 
-.form-group--item > .location-field {
+.ls-form-group--item > .ls-location-field {
     width: 20%;
 }
 
-.form-group--item > .time-field {
+.ls-form-group--item > .ls-time-field {
     width: 20%;
     border-right: none;
 }
