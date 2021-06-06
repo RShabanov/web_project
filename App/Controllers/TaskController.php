@@ -10,8 +10,8 @@ use App\Request;
 class TaskController extends BaseController {
     public function action_show() {
         echo 'TaskController -> action_show()<br>';
-        $task = new Task;
-        return $this->response()->view('all_tasks', compact('task'));
+        $tasks = Task::get_all();
+        return $this->response()->view('all_tasks', compact('tasks'));
     }
 
     public function action_index($id) {
@@ -24,21 +24,18 @@ class TaskController extends BaseController {
         $task = new Task;
         $task->fill($this->request->post());
 
-        if ($task->save()) {
+        $method = isset($task->id) ? 'update' : 'save';
+
+        if ($task->$method()) {
             // $this->response()->flash_message('Task accepted');
-            echo 'TaskController -> save(): successful';
+            echo 'TaskController -> ' . $method . '(): successful<br>';
+            $this->response()->get_back();
         }
         else {
             // error
-            echo 'TaskController -> save(): error';
+            echo 'TaskController -> ' . $method . '(): error<br>';
+            print_r($task->get_errors());
+            echo '<br>';
         }
-    }
-
-    public function action_add() {
-        
-    }
-
-    public function action_update() {
-
     }
 }

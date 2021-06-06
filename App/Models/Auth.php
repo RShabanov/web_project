@@ -13,7 +13,7 @@ class Auth extends BaseModel {
         'password'
     ];
 
-    public $name, $password;
+    public $user_id;
 
     protected function is_valid() {
         if (parent::is_valid()) {

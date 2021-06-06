@@ -9,8 +9,8 @@ use App\Session;
 
 class Task extends BaseModel {
     private static $types_table = 'task_types';
-    
     private static $statuses_table = 'task_statuses';
+    protected static $table = 'tasks';
 
     protected static $task_types = [];
 
@@ -27,14 +27,6 @@ class Task extends BaseModel {
         'user_id',
         'deleted'
     ];
-
-    public $name, $type_id,
-        $location, $time, 
-        $duration, $comment, 
-        $status_id = 1, 
-        $deleted = false;
-
-    protected static $table = 'tasks';
 
     protected function is_valid() {
         if (parent::is_valid()) {
@@ -78,5 +70,16 @@ class Task extends BaseModel {
                     static::$task_statuses['id'] = $row['name'];
         }
         return static::$task_statuses;
+    }
+
+    public function fill($array) {
+        parent::fill($array);
+        
+        if (empty($this->user_id))
+            $this->user_id = Session::get('user_id');
+        if (empty($this->status_id))
+            $this->status_id = 1;
+        if (empty($this->deleted))
+            $this->deleted = 0;
     }
 }

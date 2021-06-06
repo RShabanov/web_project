@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Db\Database;
 
+use App\Session;
+
 
 class BaseModel {
-    public $user_id;
+    public $id;
 
     protected static $table;
     protected static $attributes = [];
@@ -14,7 +16,7 @@ class BaseModel {
     protected $errors = [];
 
     protected function is_valid() {
-        return isset($this->table) && isset($this->id);
+        return isset(static::$table);
     }
 
     public function save() {
@@ -29,6 +31,8 @@ class BaseModel {
 
             $sql->execute($data);
 
+            print_r($sql->errorInfo());
+
             return $sql->rowCount() === 1;
         }
         return false;
@@ -42,7 +46,11 @@ class BaseModel {
                 $set[] = '`' . $attribute . '` = :' . $attribute;
             }
 
-            $sql = static::get_db()->prepare('UPDATE `' . static::$table . '` SET ' . implode(', ', $set) . '`) WHERE id = :id LIMIT 1;');
+            echo '<br>';
+            print_r($set);
+            echo '<br>';
+
+            $sql = static::get_db()->prepare('UPDATE `' . static::$table . '` SET ' . implode(', ', $set) . ') WHERE id = :id LIMIT 1;');
 
             $data = [];
 
@@ -54,7 +62,9 @@ class BaseModel {
 
             $sql->execute($data);
 
-            return $sql->errorInfo();
+            if (empty($sql->errorInfo()))
+                return true;
+
         }
         return false;
     }
@@ -72,9 +82,9 @@ class BaseModel {
         }
     }
 
-    public function get_all() {
-        $sql = static::get_db()->prepare('SELECT * FROM `' . static::$table . '`;');
-        $sql->execute();
+    public static function get_all() {
+        $sql = static::get_db()->prepare('SELECT * FROM `' . static::$table . '` WHERE `user_id` = :user_id;');
+        $sql->execute([':user_id' => Session::get('user_id')]);
 
         $objects = [];
 

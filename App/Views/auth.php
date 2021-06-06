@@ -18,6 +18,7 @@
 
         <div class="form-group">
             <button class="btn-submit">Log in</button>
+            <button class="btn-sign-up">Sign up</button>
         </div>
     </form>
 </div>

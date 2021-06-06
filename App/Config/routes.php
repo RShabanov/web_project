@@ -9,13 +9,17 @@ return array(
         'controller' => 'task',
         'action' => 'show'
     ],
-    '/tasks/add' => [
+    // '/tasks/add' => [
+    //     'controller' => 'task',
+    //     'action' => 'add'
+    // ],
+    // '/tasks/update' => [
+    //     'controller' => 'task',
+    //     'action' => 'update'
+    // ],
+    '/tasks/save' => [
         'controller' => 'task',
-        'action' => 'add'
-    ],
-    '/tasks/update' => [
-        'controller' => 'task',
-        'action' => 'update'
+        'action' => 'save'
     ],
     '/login' => [
         'controller' => 'auth',
