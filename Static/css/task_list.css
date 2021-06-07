@@ -5,14 +5,45 @@
     color: #101010;
 }
 
-
-.ls-task-list-form {
+.ls-task-list {
     width: 80%;
     margin: auto;
+}
 
+.ls-task-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    margin-left: 10px;
+}
+
+.ls-task-options .ls-option-btn {
+    min-width: 70px;
+
+    text-align: center;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    border-style: solid;
+    border-width: 1px;
+    border-bottom: none;
+    border-color: #e0e0e0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+    background-color: #fafafa;
+
+    margin-right: 5px;
+    padding: 4px 14px;
+}
+
+.ls-task-list-form {
     padding: 10px;
     border: 1px solid #e0e0e0;
     border-bottom: none;
+    border-radius: 4px;
 }
 
 .ls-form-group {
@@ -73,6 +104,33 @@
 
 .ls-form-group--item > .ls-task_name-field {
     width: 50%;
+    padding-left: 31px;
+}
+
+.ls-task_name-field > .ls-task_name {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    margin-left: -19px;
+}
+
+.ls-task_name-field > .ls-task_name::before {
+    content: '\270E';
+    visibility: hidden;
+
+    display: block;
+
+    height: 16px;
+    width: 16px;
+
+    margin-top: -8px;
+    margin-right: 5px;
+}
+
+.ls-task_name-field:hover > .ls-task_name::before {
+    visibility: visible;
 }
 
 .ls-form-group--item > .ls-location-field {

@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+
+    color: #101010;
+}
+
+
+.fm-task-dialog {
+    z-index: 1;
+}
+
+.fm-task-dialog > .fm-task-form {
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.fm-form-group {
+    margin-bottom: 12px;
+}
+
+.fm-form-group > .fm-form__field-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    align-items: center;
+    
+    position: relative;
+}
+
+.fm-form__field-label > .fm-field-label__title {
+    width: 120px;
+    text-align: right;
+    padding-right: 10px;
+
+    font-size: 15px;
+}
+
+.fm-form__field-label > .fm-text__input {
+    width: 300px;
+}
+
+.fm-form__field-label > input {
+    height: 25px;
+}
+
+.fm-form__field-label > .fm-form__field-comment {
+    resize: none;
+    height: 100px;
+}
+
+.fm-form__field-label > .comment__title-block {
+    align-self: flex-start;
+}
+
+.fm-form__field-label :last-child {
+    right: 0;
+}
+
+.fm-form-group .fm-btn-submit {
+    margin-left: 120px;
+    padding: 4px 12px;
+
+    outline: none;
+    border: 1px solid #8f8f8f;
+    border-radius: 2px;
+
+    width: 80px;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    background-color: #eaeaea;
+
+    cursor: pointer;
+}
