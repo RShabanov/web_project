@@ -10,6 +10,10 @@
     margin: auto;
 }
 
+.ls-task-list-form {
+    margin-bottom: 0;
+}
+
 .ls-task-options {
     display: flex;
     flex-direction: row;
@@ -33,17 +37,32 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 
-    background-color: #fafafa;
-
     margin-right: 5px;
     padding: 4px 14px;
 }
 
-.ls-task-list-form {
+.ls-task-options .add-btn {
+    background-color: #c5fdc0;
+}
+
+.ls-task-options .add-btn:hover {
+    background-color: #a9ffa1;
+}
+
+.ls-task-options .delete-btn {
+    background-color: #ffe3e3;
+}
+
+.ls-task-options .delete-btn:hover {
+    background-color: #ffbfbf;
+}
+
+.tasks-block {
     padding: 10px;
     border: 1px solid #e0e0e0;
     border-bottom: none;
-    border-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .ls-form-group {
@@ -140,4 +159,72 @@
 .ls-form-group--item > .ls-time-field {
     width: 20%;
     border-right: none;
+}
+
+
+/* filter bar */
+
+.tasks-block > .task-filter-bar,
+.task-filter-bar > .fr-task--precise,
+.fr-task--date > .fr-task--date__ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tasks-block > .task-filter-bar {
+    margin-bottom: 10px;
+
+    position: relative;
+}
+
+.fr-task--date > .fr-task--date__ul {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+.fr--time-unit__li > span,
+.fr-task--statuses > .fr-statuses__select {
+    cursor: pointer;
+}
+
+.fr--time-unit__li > span {
+    color: #4a839e;
+}
+
+.fr--time-unit__li > span:hover {
+    text-decoration: underline;
+}
+
+.fr-task--date__ul > .fr--time-unit__li {
+    border-right: 1px solid #8f8f8f;
+    padding-right: 20px;
+}
+
+.fr-task--date__ul :last-child {
+    border: none;
+}
+
+.task-filter-bar > .fr-task--date {
+    width: 400px;
+    margin-right: 40px;
+}
+
+.fr-task--statuses > .fr-statuses__select {
+    font-size: 16px;
+
+    height: 28px;
+    padding: 2px 10px 2px 5px;
+
+}
+
+.fr-task--precise-date > .fr-time__input {
+    padding: 2px 10px 2px 5px;
+}
+
+.fr-task--precise > .fr-task--statuses {
+    margin-right: 10px;
 }

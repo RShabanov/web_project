@@ -67,7 +67,7 @@ class Task extends BaseModel {
             $sql = static::get_db()->prepare('SELECT * FROM `' . static::$statuses_table . '` ORDER BY `id` ASC;');
             if ($sql->execute())
                 while ($row = $sql->fetch(PDO::FETCH_ASSOC))
-                    static::$task_statuses['id'] = $row['name'];
+                    static::$task_statuses[$row['id']] = $row['name'];
         }
         return static::$task_statuses;
     }

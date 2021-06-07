@@ -1,6 +1,6 @@
 <div>
     <dialog class="fm-task-dialog">
-        <form action="/tasks/save" method='POST' class="fm-task-form">
+        <form action="/tasks/save" name="fm-task-form" method='POST' class="fm-task-form">
             <div class="fm-form-group">
                 <label class="fm-form__field-label">
                     <span class="fm-field-label__title">Task:</span>
