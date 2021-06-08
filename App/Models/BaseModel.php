@@ -50,7 +50,7 @@ class BaseModel {
             print_r($set);
             echo '<br>';
 
-            $sql = static::get_db()->prepare('UPDATE `' . static::$table . '` SET ' . implode(', ', $set) . ') WHERE id = :id LIMIT 1;');
+            $sql = static::get_db()->prepare('UPDATE `' . static::$table . '` SET ' . implode(', ', $set) . ' WHERE id = :id LIMIT 1;');
 
             $data = [];
 
@@ -78,7 +78,8 @@ class BaseModel {
 
             $sql->execute($data);
 
-            // return $sql->errorInfo();
+            if (empty($sql->errorInfo()))
+                return true;
         }
     }
 

@@ -9,14 +9,10 @@ return array(
         'controller' => 'task',
         'action' => 'show'
     ],
-    // '/tasks/add' => [
-    //     'controller' => 'task',
-    //     'action' => 'add'
-    // ],
-    // '/tasks/update' => [
-    //     'controller' => 'task',
-    //     'action' => 'update'
-    // ],
+    '/tasks/delete' => [
+        'controller' => 'task',
+        'action' => 'delete'
+    ],
     '/tasks/save' => [
         'controller' => 'task',
         'action' => 'save'

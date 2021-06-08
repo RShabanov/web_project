@@ -14,12 +14,6 @@ class TaskController extends BaseController {
         return $this->response()->view('all_tasks', compact('tasks'));
     }
 
-    public function action_index($id) {
-        echo 'TaskController -> action_index()<br>';
-        
-        $task = new Task;
-    }
-
     public function action_save() {
         $task = new Task;
         $task->fill($this->request->post());
@@ -37,5 +31,13 @@ class TaskController extends BaseController {
             print_r($task->get_errors());
             echo '<br>';
         }
+    }
+
+    public function action_delete() {
+        echo 'TaskController -> delete()<br>';
+        echo'<br>';
+        print_r($this->request->post());
+        echo'<br>';
+        // $this->action_show();
     }
 }

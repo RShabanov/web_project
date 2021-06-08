@@ -1,7 +1,7 @@
 <?php
     $css_paths = [
-        ROOT . '/Static/css/task_list.css',
-        ROOT . '/Static/css/task_form.css',
+        '/Static/css/task_list.css',
+        '/Static/css/task_form.css',
     ];
     
     include ROOT . '/App/Views/partials/header.php'; 
@@ -13,7 +13,11 @@
 <div class="ls-task-list">
     <div class="ls-task-options">
         <button class="ls-option-btn add-btn">Add</button>
-        <button class="ls-option-btn delete-btn" form="">Delete</button>
+        <button class="ls-option-btn delete-btn" 
+                type="submit"
+                form="ls-task-list"
+                formaction="/tasks/delete"
+                name="task-delete-btn">Delete</button>
     </div>
     <div class="tasks-block">
         <div class="task-filter-bar">
@@ -41,7 +45,7 @@
                 </ul>
             </span>
         </div>
-        <form action="" name="ls-task-list" method='POST' class="ls-task-list-form">
+        <form action="" name="ls-task-list" method='POST' class="ls-task-list-form" id="ls-task-list">
             <div class="ls-form-group ls-form-group--header">
                 <ul class="ls-form-group--item">
                     <li class="ls-group--item-field ls-select-field">
@@ -64,13 +68,14 @@
             <?php foreach ($tasks as $task): ?>
                 <div class="ls-form-group">
                     <ul class="ls-form-group--item"
+                        data-type_id="<?= $task->type_id; ?>"
                         data-duration="<?= $task->duration; ?>"
                         data-comment="<?= $task->comment; ?>"
                         data-status_id="<?= $task->status_id; ?>"
                         data-deleted="<?= $task->deleted; ?>"
                         >
                         <li class="ls-group--item-field ls-select-field">
-                            <input type="checkbox" class="select-checkbox" value="<?= $task->id; ?>" />
+                            <input type="checkbox" class="select-checkbox" value="<?= $task->id; ?>" name="<?= $task->id; ?>" />
                         </li>
                         <li class="ls-group--item-field ls-type-field">
                             <?= $task->get_types()[$task->type_id]; ?>
@@ -95,6 +100,10 @@
 
 
 <?php
-    
+
+    $script_paths = [
+        '/Static/js/task_list.js',
+    ];
+
     include ROOT . '/App/Views/partials/footer.php'; 
 ?>

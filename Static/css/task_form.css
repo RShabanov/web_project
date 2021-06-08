@@ -6,6 +6,10 @@
 }
 
 
+.fm-form-group--add-task {
+    display: none;
+}
+
 .fm-task-dialog {
     z-index: 1;
     border-radius: 4px;
@@ -75,4 +79,29 @@
 
     background-color: #c7e0ec;
     padding: 4px 14px;
+}
+
+
+.fm-task-dialog > .fm-dialog__header {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.fm-dialog__header .fm-close-btn {
+    cursor: pointer;
+
+    width: 25px;
+    height: 25px;
+
+    border: none;
+    outline: none;
+
+    --weight: 1px;
+    --aa: 1px;
+    --color: #c53434;
+
+    background:
+    linear-gradient(45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa))),
+    linear-gradient(-45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa)));
+
 }
