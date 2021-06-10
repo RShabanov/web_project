@@ -37,10 +37,10 @@
 
     // close dialog
     taskDialog.onkeydown = event => {
-        if (event.code === 'Escape') taskDialog.close();
+        if (event.code === 'Escape') closeTaskForm();
     };
     taskDialogCloseBtn.onclick = event => {
-        taskDialog.close();
+        closeTaskForm();
     };
     // close dialog -----
 
@@ -62,6 +62,14 @@
             if (updateMode) {
                 // add input for status
                 status_div.style.display = 'block';
+
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = 'id';
+                hiddenField.value = task.id;
+
+                taskDialogForm.insertBefore(hiddenField, taskDialogForm.firstElementChild);
+
             } else {
                 // remove input for status
                 status_div.style.display = 'none';
@@ -89,5 +97,11 @@
         task.time = task.time[0] + 'T' + task.time[1].slice(0, -3);
 
         return task;
+    }
+
+    function closeTaskForm() {
+        if (taskDialogForm.elements['id'])
+            taskDialogForm.removeChild(taskDialogForm.elements['id']);
+        taskDialog.close();
     }
 })();

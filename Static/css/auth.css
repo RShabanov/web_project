@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+
+    color: #101010;
+}
+
+.auth-block__div {
+    width: 80%;
+    margin: auto;
+}
+
+.auth-block__div > .auth-form__form {
+    border: 1px solid #8f8f8f;
+    border-radius: 4px;
+
+    padding: 10px;
+    width: 300px;
+
+    background-color: #fff;
+}
+
+.auth-form__form > .auth-form-group {
+    margin-bottom: 10px;
+}
+
+.auth-form-group > .auth-error-msg {
+    font-size: 14px;
+    color: #dc4c4c;
+}
+
+.auth-form-group > .auth-extra-info {
+    font-size: 12px;
+    color: #404040;
+}
+
+.auth-form__field-label > .auth-field-label__title {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.auth-form__field-label > .auth-form__field-input {
+    width: 100%;
+    height: 30px;
+
+    font-size: 16px;
+
+    margin-top: 5px;
+}
+
+.auth-form__form > .another-enter {
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.another-enter > .another-enter__a {
+    text-decoration: none;
+    color: #4a839e;
+}
+
+
+.auth-form-group > .auth-form-title {
+    color: #222;
+}
+
+.auth-form-group > .btn-submit {
+    min-width: 70px;
+
+    text-align: center;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    border-radius: 2px;
+    border: 1px solid #c1c1c1;
+
+    background-color: #c5fdc0;
+    padding: 4px 14px;
+    margin-top: 5px;
+}

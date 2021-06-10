@@ -15,8 +15,14 @@ class TaskController extends BaseController {
     }
 
     public function action_save() {
+        if ($this->request->method() === 'GET') {
+            $this->response()->redirect('tasks/list');
+        }
+
         $task = new Task;
         $task->fill($this->request->post());
+        if (!empty($this->request->post()['id']))
+            $task->id = $this->request->post()['id'];
 
         $method = isset($task->id) ? 'update' : 'save';
 
@@ -34,10 +40,15 @@ class TaskController extends BaseController {
     }
 
     public function action_delete() {
+        if ($this->request->method() === 'GET') {
+            $this->response()->redirect('tasks/list');
+        }
+
         echo 'TaskController -> delete()<br>';
         echo'<br>';
         print_r($this->request->post());
         echo'<br>';
-        // $this->action_show();
+
+        
     }
 }

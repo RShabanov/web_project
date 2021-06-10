@@ -29,11 +29,9 @@ class BaseModel {
                 $data[$attribute] = $this->$attribute;
             }
 
-            $sql->execute($data);
+            return $sql->execute($data);
 
-            print_r($sql->errorInfo());
-
-            return $sql->rowCount() === 1;
+            // return $sql->rowCount() === 1;
         }
         return false;
     }
@@ -46,11 +44,7 @@ class BaseModel {
                 $set[] = '`' . $attribute . '` = :' . $attribute;
             }
 
-            echo '<br>';
-            print_r($set);
-            echo '<br>';
-
-            $sql = static::get_db()->prepare('UPDATE `' . static::$table . '` SET ' . implode(', ', $set) . ' WHERE id = :id LIMIT 1;');
+            $sql = static::get_db()->prepare('UPDATE `' . static::$table . '` SET ' . implode(', ', $set) . ' WHERE `id` = :id LIMIT 1;');
 
             $data = [];
 
@@ -60,11 +54,9 @@ class BaseModel {
 
             $data['id'] = $this->id;
 
-            $sql->execute($data);
-
-            if (empty($sql->errorInfo()))
-                return true;
-
+            return $sql->execute($data);
+            
+            // return $sql->rowCount() === 1;
         }
         return false;
     }
@@ -76,11 +68,14 @@ class BaseModel {
             $data = [];
             $data['id'] = $this->id;
 
-            $sql->execute($data);
+            return $sql->execute($data);
 
-            if (empty($sql->errorInfo()))
-                return true;
+            // return $sql->rowCount() === 1;
         }
+    }
+
+    public function delete_group(array $array) {
+        
     }
 
     public static function get_all() {

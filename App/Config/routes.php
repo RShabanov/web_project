@@ -20,5 +20,9 @@ return array(
     '/login' => [
         'controller' => 'auth',
         'action' => 'login'
-    ]
+    ],
+    '/create-account' => [
+        'controller' => 'register',
+        'action' => 'create_account'
+    ],
 );

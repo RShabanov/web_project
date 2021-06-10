@@ -18,7 +18,7 @@ class Auth extends BaseModel {
     protected function is_valid() {
         if (parent::is_valid()) {
             if (empty($this->name) || empty($this->password))
-                $this->errors['authorization'] = 'Incorrect name or password';
+                $this->errors['authorization'] = 'All fields must be filled';
             
             return !$this->has_errors();
         }
@@ -26,7 +26,7 @@ class Auth extends BaseModel {
     }
 
     public function match() {
-        if (!empty($this->name) && !empty($this->password)) {
+        if ($this->is_valid()) {
             $set = [
                 ':name' => $this->name
             ];
@@ -39,6 +39,12 @@ class Auth extends BaseModel {
                         $this->user_id = intval($user['id']);
                         return true;
                     }
+                    else {
+                        $this->errors['authorization'] = 'Incorrect name or password';
+                    }
+                }
+                else {
+                    $this->errors['authorization'] = 'Incorrect name or password';
                 }
             }
         }
