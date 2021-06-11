@@ -11,7 +11,7 @@ class TaskController extends BaseController {
     public function action_show() {
         echo 'TaskController -> action_show()<br>';
         $tasks = Task::get_all();
-        return $this->response()->view('all_tasks', compact('tasks'));
+        $this->response()->view('all_tasks', compact('tasks'));
     }
 
     public function action_save() {
@@ -27,7 +27,6 @@ class TaskController extends BaseController {
         $method = isset($task->id) ? 'update' : 'save';
 
         if ($task->$method()) {
-            // $this->response()->flash_message('Task accepted');
             echo 'TaskController -> ' . $method . '(): successful<br>';
             $this->response()->get_back();
         }
@@ -37,6 +36,9 @@ class TaskController extends BaseController {
             print_r($task->get_errors());
             echo '<br>';
         }
+        
+        $tasks = Task::get_all();
+        $this->response()->view('all_tasks', compact('tasks', 'task'));
     }
 
     public function action_delete() {

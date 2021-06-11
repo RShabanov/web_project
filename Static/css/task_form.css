@@ -105,3 +105,11 @@
     linear-gradient(-45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa)));
 
 }
+
+
+.fm-form-group > .fm-error-msg {
+    margin-left: 120px;
+
+    font-size: 14px;
+    color: #dc4c4c;
+}

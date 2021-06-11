@@ -38,11 +38,12 @@
             </span>
             <span class="fr-task--date">
                 <ul class="fr-task--date__ul">
-                    <li class="fr--time-unit__li"><span>today</span></li>
-                    <li class="fr--time-unit__li"><span>tomorrow</span></li>
-                    <li class="fr--time-unit__li"><span>current week</span></li>
-                    <li class="fr--time-unit__li"><span>next week</span></li>
+                    <li class="fr--time-unit__li" data-key="today"><span>today</span></li>
+                    <li class="fr--time-unit__li" data-key="tomorrow"><span>tomorrow</span></li>
+                    <li class="fr--time-unit__li" data-key="current_week"><span>current week</span></li>
+                    <li class="fr--time-unit__li" data-key="next_week"><span>next week</span></li>
                 </ul>
+                <button class="fr--reset-btn" name="reset-filters-btn">Reset</button>
             </span>
         </div>
         <form action="" name="ls-task-list" method='POST' class="ls-task-list-form" id="ls-task-list">
@@ -102,6 +103,7 @@
 <?php
 
     $script_paths = [
+        '/Static/js/task_form.js',
         '/Static/js/task_list.js',
     ];
 

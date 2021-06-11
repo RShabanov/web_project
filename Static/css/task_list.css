@@ -166,7 +166,8 @@
 
 .tasks-block > .task-filter-bar,
 .task-filter-bar > .fr-task--precise,
-.fr-task--date > .fr-task--date__ul {
+.fr-task--date > .fr-task--date__ul,
+.fr-task--date {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -183,7 +184,10 @@
     list-style: none;
 
     margin: 0;
+    margin-right: 80px;
     padding: 0;
+
+    width: 400px;
 }
 
 .fr--time-unit__li > span,
@@ -193,6 +197,10 @@
 
 .fr--time-unit__li > span {
     color: #4a839e;
+}
+
+.selected-option {
+    text-decoration: underline;
 }
 
 .fr--time-unit__li > span:hover {
@@ -206,11 +214,6 @@
 
 .fr-task--date__ul :last-child {
     border: none;
-}
-
-.task-filter-bar > .fr-task--date {
-    width: 400px;
-    margin-right: 40px;
 }
 
 .fr-task--statuses > .fr-statuses__select {
@@ -227,4 +230,19 @@
 
 .fr-task--precise > .fr-task--statuses {
     margin-right: 10px;
+}
+
+.fr-task--date > .fr--reset-btn {
+    min-width: 70px;
+
+    text-align: center;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    border-radius: 2px;
+    border: 1px solid #c1c1c1;
+
+    padding: 4px 14px;
+    outline: none;
 }
