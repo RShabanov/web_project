@@ -78,10 +78,32 @@
 
     const resetBtn = document.querySelector('.fr--reset-btn');
 
+    let taskNumberToDelete = 0;
+
 
 
     window.onload = event => {
         filterTasks(taskTypes.value);
+    };
+
+    taskListForm.onclick = event => {
+        if (event.target.classList.contains('select-checkbox')) {
+            taskNumberToDelete += (event.target.checked) ? 1 : -1;
+
+            const deleteBtn = taskListForm.elements['task-delete-btn'];
+
+            if (taskNumberToDelete > 0) {
+                deleteBtn.style.backgroundColor = '#ffbfbf';
+                deleteBtn.disabled = false;
+                deleteBtn.style.opacity = 1;
+                deleteBtn.style.cursor = 'pointer';
+            } else {
+                deleteBtn.style.backgroundColor = '#ffe3e3';
+                deleteBtn.disabled = true;
+                deleteBtn.style.opacity = 0.75;
+                deleteBtn.style.cursor = 'auto';
+            }
+        }
     };
 
     taskTypes.onchange = event => {

@@ -51,11 +51,13 @@
 
 .ls-task-options .delete-btn {
     background-color: #ffe3e3;
+    opacity: 0.75;
+    cursor: auto;
 }
 
-.ls-task-options .delete-btn:hover {
+/* .ls-task-options .delete-btn:hover {
     background-color: #ffbfbf;
-}
+} */
 
 .tasks-block {
     padding: 10px;
