@@ -17,7 +17,7 @@
                 type="submit"
                 form="ls-task-list"
                 formaction="/tasks/delete"
-                name="task-delete-btn">Delete</button>
+                name="task-delete-btn" disabled>Delete</button>
     </div>
     <div class="tasks-block">
         <div class="task-filter-bar">

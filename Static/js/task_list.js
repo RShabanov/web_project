@@ -80,6 +80,8 @@
 
     let taskNumberToDelete = 0;
 
+    let allTasksSelected = false;
+
 
 
     window.onload = event => {
@@ -90,20 +92,27 @@
         if (event.target.classList.contains('select-checkbox')) {
             taskNumberToDelete += (event.target.checked) ? 1 : -1;
 
-            const deleteBtn = taskListForm.elements['task-delete-btn'];
-
-            if (taskNumberToDelete > 0) {
-                deleteBtn.style.backgroundColor = '#ffbfbf';
-                deleteBtn.disabled = false;
-                deleteBtn.style.opacity = 1;
-                deleteBtn.style.cursor = 'pointer';
-            } else {
-                deleteBtn.style.backgroundColor = '#ffe3e3';
-                deleteBtn.disabled = true;
-                deleteBtn.style.opacity = 0.75;
-                deleteBtn.style.cursor = 'auto';
-            }
+            styleBtn(taskListForm.elements['task-delete-btn']);
+            allTasksSelected = taskNumberToDelete === (taskListForm.childElementCount - 1);        ;
         }
+    };
+
+    taskListFormHeader.querySelector('.ls-select-field').onclick = event => {
+        let listToDelete = Array.from(taskListForm.children);
+        listToDelete.shift();
+
+        allTasksSelected = !allTasksSelected;
+        if (allTasksSelected) {
+            taskNumberToDelete = taskListForm.childElementCount - 1;
+        } else {
+            taskNumberToDelete = 0;
+        }
+
+        listToDelete.forEach(item => {
+            item.querySelector('.select-checkbox').checked = allTasksSelected;
+        });
+
+        styleBtn(taskListForm.elements['task-delete-btn']);
     };
 
     taskTypes.onchange = event => {
@@ -196,4 +205,18 @@
         });
     }
 
+
+    function styleBtn(btn) {
+        if (taskNumberToDelete > 0) {
+            btn.style.backgroundColor = '#ffbfbf';
+            btn.disabled = false;
+            btn.style.opacity = 1;
+            btn.style.cursor = 'pointer';
+        } else {
+            btn.style.backgroundColor = '#ffe3e3';
+            btn.disabled = true;
+            btn.style.opacity = 0.75;
+            btn.style.cursor = 'auto';
+        }
+    }
 })();

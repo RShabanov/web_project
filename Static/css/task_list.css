@@ -163,6 +163,10 @@
     border-right: none;
 }
 
+.ls-form-group--header > .ls-form-group--item > .ls-select-field {
+    cursor: pointer;
+}
+
 
 /* filter bar */
 
