@@ -9,14 +9,15 @@
             <link rel="stylesheet" type="text/css" href="<?= $css_path; ?>" />
     <?php endforeach; endif; ?>
 
+    <link rel="stylesheet" type="text/css" href="/Static/css/partials/header.css">
+
     <title>Calendar</title>
 
     
 </head>
-<h1>HEADER</h1>
 <header class="main-header__header">
     <div class="site-title__div">My Calendar</div>
     <div class="header-links__div">
-        <a href="/logout">Log out</button>
+        <a class="logout-btn" href="/logout">Log out</a>
     </div>
 </header>

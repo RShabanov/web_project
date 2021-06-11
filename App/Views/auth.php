@@ -34,7 +34,7 @@
 
         <div class="auth-form-group another-enter">
             <span>Don't have an account?</span>
-            <a href="/create-account" class="another-enter__a">Create account</a>
+            <a href="/create_account" class="another-enter__a">Create account</a>
         </div>
     </form>
 </div>
