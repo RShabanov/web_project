@@ -37,9 +37,7 @@ class AuthController extends BaseController {
     }
 
     public function action_logout() {
-        echo '<br>AuthController -> action_logout()<br>';
         Session::finish_session();
         $this->response()->redirect('login');
-
     }
 }

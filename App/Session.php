@@ -52,8 +52,7 @@ class Session {
     }
 
     public static function finish_session() {
-        static::session_unset();
-        static::session_abort();
+        session_destroy();
     }
 
 }
