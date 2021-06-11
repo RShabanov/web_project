@@ -26,17 +26,16 @@ class RegisterController extends BaseController {
         $register->fill($this->request->post());
 
         if ($this->request->method() === 'POST') {
-            echo '<br>RegisterController -> action_create_account() POST<br>';
-            // if ($register->create_account()) {
-            //     echo '<br>' . static::class . ' -> action_create_account(): successful<br>';
-            //     echo 'User_id: ' . $register->user_id . '<br>';
-            //     Session::authorize($register->user_id);
+            if ($register->create_account()) {
+                echo '<br>' . static::class . ' -> action_create_account(): successful<br>';
+                echo 'User_id: ' . $register->user_id . '<br>';
+                Session::authorize($register->user_id);
     
-            //     $this->response()->redirect('tasks/list');
-            // }
-            // else {
-            //     echo '<br>' . static::class . ' -> action_create_account(): failed<br>';
-            // }    
+                $this->response()->redirect('tasks/list');
+            }
+            else {
+                echo '<br>' . static::class . ' -> action_create_account(): failed<br>';
+            }    
         }
 
         $this->response()->view('register', compact('register'));

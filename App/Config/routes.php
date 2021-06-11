@@ -21,7 +21,11 @@ return array(
         'controller' => 'auth',
         'action' => 'login'
     ],
-    '/create-account' => [
+    '/logout' => [
+        'controller' => 'auth',
+        'action' => 'logout'
+    ],
+    '/create_account' => [
         'controller' => 'register',
         'action' => 'create_account'
     ],

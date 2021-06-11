@@ -15,11 +15,11 @@ class BaseController {
 
         echo 'Is authorized: ' . Session::is_authorized() . '<br>';
 
-        // if (!Session::is_authorized() &&
-        //     !preg_match('/AuthController$/', static::class) &&
-        //     !preg_match('/RegisterController$/', static::class)) {
-        //         $this->response()->redirect('login');
-        // }
+        if (!Session::is_authorized() &&
+            !preg_match('/AuthController$/', static::class) &&
+            !preg_match('/RegisterController$/', static::class)) {
+                $this->response()->redirect('login');
+        }
     }
 
     public function response() {
