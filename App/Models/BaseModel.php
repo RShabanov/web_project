@@ -30,8 +30,6 @@ class BaseModel {
             }
 
             return $sql->execute($data);
-
-            // return $sql->rowCount() === 1;
         }
         return false;
     }
@@ -55,8 +53,6 @@ class BaseModel {
             $data['id'] = $this->id;
 
             return $sql->execute($data);
-            
-            // return $sql->rowCount() === 1;
         }
         return false;
     }
@@ -69,13 +65,7 @@ class BaseModel {
             $data['id'] = $this->id;
 
             return $sql->execute($data);
-
-            // return $sql->rowCount() === 1;
         }
-    }
-
-    public function delete_group(array $array) {
-        
     }
 
     public static function get_all() {
@@ -91,11 +81,13 @@ class BaseModel {
         return $objects;
     }
 
-    public function get_by_id() {
+    public static function get_by_id($id) {
         $sql = static::get_db()->prepare('SELECT * FROM `' . static::$table . '` WHERE id = :id LIMIT 1;');
-        $sql->execute(['id' => $id]);
-        $object = $sql->fetchObject(static::class);
-        return $object;
+        if ($sql->execute(['id' => $id])) {
+            $object = $sql->fetchObject(static::class);
+            return $object;
+        }
+        return false;
     }
 
     public function get_errors() {

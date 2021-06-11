@@ -79,13 +79,22 @@
     const resetBtn = document.querySelector('.fr--reset-btn');
 
     let taskNumberToDelete = 0;
-
     let allTasksSelected = false;
 
 
 
     window.onload = event => {
         filterTasks(taskTypes.value);
+
+        taskNumberToDelete = (() => {
+            let number = 0;
+            // taskListForm.elements['id[]'].forEach(item => {
+            //     number += item.checked;
+            // });
+            // return number;
+        })();
+
+        styleBtn(taskListForm.elements['task-delete-btn']);
     };
 
     taskListForm.onclick = event => {
@@ -179,13 +188,15 @@
         if (taskStatus !== 'all') {
             taskList.forEach(task => {
                 if (task.firstElementChild.dataset.status_id === taskStatus &&
+                    task.firstElementChild.dataset.deleted === '0' &&
                     filterTime(task.querySelector('.ls-time-field').innerText.trim())) {
                         taskListForm.appendChild(task);
                     }
             });
         } else if (taskStatus === 'all') {
             taskList.forEach(task => {
-                if (filterTime(task.querySelector('.ls-time-field').innerText.trim())) {
+                if (task.firstElementChild.dataset.deleted === '0' &&
+                    filterTime(task.querySelector('.ls-time-field').innerText.trim())) {
                     taskListForm.appendChild(task);
                 }
             });

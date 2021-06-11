@@ -76,7 +76,7 @@
                         data-deleted="<?= $task->deleted; ?>"
                         >
                         <li class="ls-group--item-field ls-select-field">
-                            <input type="checkbox" class="select-checkbox" value="<?= $task->id; ?>" name="<?= $task->id; ?>" />
+                            <input type="checkbox" class="select-checkbox" value="<?= $task->id; ?>" name="id[]" />
                         </li>
                         <li class="ls-group--item-field ls-type-field">
                             <?= $task->get_types()[$task->type_id]; ?>

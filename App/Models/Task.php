@@ -82,4 +82,21 @@ class Task extends BaseModel {
         if (empty($this->deleted))
             $this->deleted = 0;
     }
+
+    public static function delete_group($array) {
+        if (!empty($array) && !empty($array['id'])) {
+            foreach ($array['id'] as $id) {
+                $task = Task::get_by_id($id);
+                if (is_object($task)) {
+                    $task->deleted = 1;
+                    if (!$task->update()) return false;
+                }
+                else {
+                    return false;
+                }
+            } 
+            return true;
+        }
+        return false;
+    }
 }

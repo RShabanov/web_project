@@ -51,6 +51,7 @@ class TaskController extends BaseController {
         print_r($this->request->post());
         echo'<br>';
 
-        
+        Task::delete_group($this->request->post());
+        $this->response()->get_back();
     }
 }
