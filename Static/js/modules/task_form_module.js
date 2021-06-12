@@ -1,6 +1,13 @@
 "use strict";
 
 export class Task {
+    static varNames = [
+        'id', 'name', 'type_id',
+        'location', 'time',
+        'duration', 'comment',
+        'status_id', 'deleted',
+    ];
+    
     constructor() {
         this.id = '';
         this.name = '';

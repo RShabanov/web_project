@@ -41,14 +41,14 @@
             <div class="fm-form-group">
                 <label class="fm-form__field-label">
                     <span class="fm-field-label__title">Date and time:</span>
-                    <input value="<?= (empty($task) && empty($task->time)) ? '' : $task->time; ?>" type="datetime-local" name="time" class="fm-form__field-input" required autocomplete="off">
+                    <input value="<?= (empty($task) && empty($task->time)) ? '' : $task->time; ?>" type="datetime-local" name="time" class="fm-form__field-input" min="1970-01-01T00:00" max="2038-01-19T03:14" required autocomplete="off">
                 </label>
             </div>
 
             <div class="fm-form-group">
                 <label class="fm-form__field-label">
                     <span class="fm-field-label__title">Duration:</span>
-                    <input value="<?= (empty($task) && empty($task->duration)) ? '' : $task->duration; ?>" type="time" name="duration" class="fm-form__field-input" required autocomplete="off">
+                    <input value="<?= (empty($task) && empty($task->duration)) ? '01:00' : $task->duration; ?>" type="time" name="duration" class="fm-form__field-input" max="23:59" required autocomplete="off">
                 </label>
             </div>
 

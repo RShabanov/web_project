@@ -49,6 +49,13 @@ import {Task} from './modules/task_form_module.js';
     let allTasksSelected = false;
 
 
+    const showFormModes = {
+        save: 1,
+        update: 2,
+        deleted_task: 3,
+    }
+
+
 
     window.onload = event => {
         filterTasks(taskTypes.value);
@@ -71,7 +78,9 @@ import {Task} from './modules/task_form_module.js';
             allTasksSelected = taskNumberToDelete === (taskListForm.childElementCount - 1);        ;
         } else if (event.target.classList.contains('ls-task_name')) {
             const task = getTask(event.target.parentElement.parentElement);
-            showForm(task, true);
+            const showMode = (task.id !== null) ? showFormModes.update : showFormModes.deleted_task;
+
+            showForm(task, showMode);
         }
     };
 
@@ -87,7 +96,8 @@ import {Task} from './modules/task_form_module.js';
         }
 
         listToDelete.forEach(item => {
-            item.querySelector('.select-checkbox').checked = allTasksSelected;
+            const checkbox = item.querySelector('.select-checkbox');
+            if (checkbox) checkbox.checked = allTasksSelected;
         });
 
         styleBtn(taskListForm.elements['task-delete-btn']);
@@ -201,34 +211,45 @@ import {Task} from './modules/task_form_module.js';
 
 
 
-    function showForm(task = new Task, updateMode = false) {
+    function showForm(task = new Task, showMode = showFormModes.save) {
         taskDialog.close();
 
         if (task instanceof Task) {
-            taskDialogForm.elements['name'].value = task.name;
-            taskDialogForm.elements['type_id'].value = task.type_id;
-            taskDialogForm.elements['location'].value = task.location;
-            taskDialogForm.elements['time'].value = task.time;
-            taskDialogForm.elements['duration'].value = task.duration;
-            taskDialogForm.elements['comment'].value = task.comment;
-            taskDialogForm.elements['status_id'].value = task.status_id;
+            const nonNullVars = [
+                'name', 'type_id', 'location',
+                'time', 'duration', 'comment', 'status_id',
+            ];
+
+            nonNullVars.forEach(variable => {
+                taskDialogForm.elements[variable].value = task[variable];
+                taskDialogForm.elements[variable].disabled = false;
+            });
 
             let status_div = taskDialogForm.elements['status_id'].parentElement.parentElement;
+            const submitBtn = taskDialogForm.querySelector('.fm-btn-submit');
 
-            if (updateMode) {
-                // add input for status
-                status_div.style.display = 'block';
+            switch (showMode) {
+                case showFormModes.save:
+                    submitBtn.hidden = false;
+                    status_div.style.display = 'none';
+                    break;
+                case showFormModes.update:
+                    submitBtn.hidden = false;
+                    status_div.style.display = 'block';
 
-                const hiddenField = document.createElement('input');
-                hiddenField.type = 'hidden';
-                hiddenField.name = 'id';
-                hiddenField.value = task.id;
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = 'id';
+                    hiddenField.value = task.id;
 
-                taskDialogForm.insertBefore(hiddenField, taskDialogForm.firstElementChild);
-
-            } else {
-                // remove input for status
-                status_div.style.display = 'none';
+                    taskDialogForm.insertBefore(hiddenField, taskDialogForm.firstElementChild);
+                    break;
+                case showFormModes.deleted_task:
+                    nonNullVars.forEach(variable => {
+                        taskDialogForm.elements[variable].disabled = true;
+                    });
+                    submitBtn.hidden = true;
+                    break;
             }
 
             deleteErrorMsgs();
@@ -248,7 +269,9 @@ import {Task} from './modules/task_form_module.js';
         task.status_id = taskHtml.dataset.status_id;
         task.deleted = taskHtml.dataset.deleted;
 
-        task.id = taskHtml.querySelector('.select-checkbox').value;
+        task.id = taskHtml.querySelector('.select-checkbox');
+        if (task.id !== null) task.id = task.id.value;
+
         task.name = taskHtml.querySelector('.ls-task_name').innerText;
         task.location = taskHtml.querySelector('.ls-location-field').innerText;
         task.time = taskHtml.querySelector('.ls-time-field').innerText.split(' ');
