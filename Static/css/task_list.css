@@ -176,6 +176,11 @@ body {
     cursor: pointer;
 }
 
+.deleted-task {
+    font-size: 12px;
+    color: #c53434;
+}
+
 
 /* filter bar */
 

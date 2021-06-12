@@ -10,6 +10,23 @@ import {Task} from './modules/task_form_module.js';
     const taskList = Array.from(taskListForm.children);
     const taskListFormHeader = taskList.shift();
 
+    taskList.forEach(task => {
+        if (task.firstElementChild.dataset.deleted === '1') {
+            let li = task.querySelector('.ls-select-field');
+            const checkbox = li.querySelector('.select-checkbox');
+            if (checkbox) {
+                li.removeChild(checkbox);
+
+                const span = document.createElement('span');
+                span.classList.add('deleted-task');
+                span.innerText = 'deleted';
+
+                li.appendChild(span);
+            }
+            
+        }
+    });
+
     const taskDialog = document.querySelector('.fm-task-dialog');
     const taskDialogForm = document.forms['fm-task-form'];
 
