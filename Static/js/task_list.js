@@ -1,82 +1,32 @@
 "use strict";
 
+
+import {TimeRange} from './modules/task_list_module.js';
+import {Task} from './modules/task_form_module.js';
+
 (function() {
-
-    class TimeRange {
-        // lowerBound <= value < upperBound
-        constructor(rangeKey, date) {
-            this.set(rangeKey, date);
-        }
-
-        set(rangeKey, date) {
-            if (date ?? true) {
-                this.lowerBound = new Date();
-                this.upperBound = new Date();
-            } else {
-                this.lowerBound = new Date(date);
-                this.upperBound = new Date(date);
-            }
-
-            this.resetTime();
-
-            switch (rangeKey ?? 'today') {
-                case 'today':
-                    this.setBounds('day');
-                    break;
-                case 'tomorrow':
-                    this.setBounds('day');
-                    this.shift(1);
-                    break;
-                case 'current_week':
-                    this.setBounds('week');
-                    break;
-                case 'next_week':
-                    this.setBounds('week');
-                    this.shift(7);
-                    break;
-            }
-        }
-
-        resetTime() {
-            this.lowerBound.setHours(0, 0, 0, 0);    
-            this.upperBound.setHours(0, 0, 0, 0);    
-        }
-
-        setBounds(dateKey) {
-            switch (dateKey) {
-                case 'day':
-                    this.upperBound.setDate(this.upperBound.getDate() + 1);
-                    break;
-                case 'week':
-                    this.lowerBound.setDate(this.lowerBound.getDate() - this.lowerBound.getDay() + 1);
-                    this.upperBound.setDate(this.upperBound.getDate() + 8 - this.upperBound.getDay());
-                    break;
-            }
-        }
-
-        shift(days) {
-            this.lowerBound.setDate(this.lowerBound.getDate() + days);
-            this.upperBound.setDate(this.upperBound.getDate() + days);
-        }
-
-        contains(date) {
-            const tempDate = new Date(date);
-            return this.lowerBound <= tempDate && tempDate < this.upperBound;
-        }
-    };
 
     const taskListForm = document.forms['ls-task-list'];
     const taskList = Array.from(taskListForm.children);
     const taskListFormHeader = taskList.shift();
+
+    const taskDialog = document.querySelector('.fm-task-dialog');
+    const taskDialogForm = document.forms['fm-task-form'];
+
+    const taskDialogCloseBtn = taskDialog.querySelector('.fm-close-btn');
+
+    const addTaskButton = document.querySelector('.ls-task-options > .add-btn');
+    addTaskButton.onclick = event => showForm();
 
     const taskTypes = document.querySelector('.fr-statuses__select');
     const taskTime = document.querySelector('.fr-time__input');
 
     const simpleTimeOptions = document.querySelector('.fr-task--date__ul');
     const timeOptions = Array.from(simpleTimeOptions.children);
-    const timeRange = new TimeRange();
 
     const resetBtn = document.querySelector('.fr--reset-btn');
+
+    const timeRange = new TimeRange();
 
     let taskNumberToDelete = 0;
     let allTasksSelected = false;
@@ -85,17 +35,16 @@
 
     window.onload = event => {
         filterTasks(taskTypes.value);
-
-        taskNumberToDelete = (() => {
-            let number = 0;
-            // taskListForm.elements['id[]'].forEach(item => {
-            //     number += item.checked;
-            // });
-            // return number;
-        })();
-
-        styleBtn(taskListForm.elements['task-delete-btn']);
     };
+
+    // close dialog
+    window.onkeydown = event => {
+        if (event.code === 'Escape') closeTaskForm();
+    };
+    taskDialogCloseBtn.onclick = event => {
+        closeTaskForm();
+    };
+    // close dialog -----
 
     taskListForm.onclick = event => {
         if (event.target.classList.contains('select-checkbox')) {
@@ -103,6 +52,9 @@
 
             styleBtn(taskListForm.elements['task-delete-btn']);
             allTasksSelected = taskNumberToDelete === (taskListForm.childElementCount - 1);        ;
+        } else if (event.target.classList.contains('ls-task_name')) {
+            const task = getTask(event.target.parentElement.parentElement);
+            showForm(task, true);
         }
     };
 
@@ -229,5 +181,81 @@
             btn.style.opacity = 0.75;
             btn.style.cursor = 'auto';
         }
+    }
+
+
+
+    function showForm(task = new Task, updateMode = false) {
+        taskDialog.close();
+
+        if (task instanceof Task) {
+            taskDialogForm.elements['name'].value = task.name;
+            taskDialogForm.elements['type_id'].value = task.type_id;
+            taskDialogForm.elements['location'].value = task.location;
+            taskDialogForm.elements['time'].value = task.time;
+            taskDialogForm.elements['duration'].value = task.duration;
+            taskDialogForm.elements['comment'].value = task.comment;
+            taskDialogForm.elements['status_id'].value = task.status_id;
+
+            let status_div = taskDialogForm.elements['status_id'].parentElement.parentElement;
+
+            if (updateMode) {
+                // add input for status
+                status_div.style.display = 'block';
+
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = 'id';
+                hiddenField.value = task.id;
+
+                taskDialogForm.insertBefore(hiddenField, taskDialogForm.firstElementChild);
+
+            } else {
+                // remove input for status
+                status_div.style.display = 'none';
+            }
+
+            deleteErrorMsgs();
+
+            taskDialog.show();
+        } else {
+            console.log('Error in showForm: task is not an instance of Task');
+        }
+    }
+
+    function getTask(taskHtml) {
+        const task = new Task();
+
+        task.type_id = taskHtml.dataset.type_id;
+        task.duration = taskHtml.dataset.duration;
+        task.comment = taskHtml.dataset.comment;
+        task.status_id = taskHtml.dataset.status_id;
+        task.deleted = taskHtml.dataset.deleted;
+
+        task.id = taskHtml.querySelector('.select-checkbox').value;
+        task.name = taskHtml.querySelector('.ls-task_name').innerText;
+        task.location = taskHtml.querySelector('.ls-location-field').innerText;
+        task.time = taskHtml.querySelector('.ls-time-field').innerText.split(' ');
+        task.time = task.time[0] + 'T' + task.time[1].slice(0, -3);
+
+        return task;
+    }
+
+    function closeTaskForm() {
+        if (window.location.href.match(/tasks\/save$/)) {
+            window.location = window.location.hostname + '/tasks/list';
+        }
+
+        if (taskDialogForm.elements['id'])
+            taskDialogForm.removeChild(taskDialogForm.elements['id']);
+        taskDialog.close();
+    }
+
+    function deleteErrorMsgs() {
+        let errorsMsgs = taskDialogForm.querySelectorAll('.fm-form-group > .fm-error-msg');
+
+        errorsMsgs.forEach(errorItem => {
+            taskDialogForm.removeChild(errorItem.parentElement);
+        });
     }
 })();

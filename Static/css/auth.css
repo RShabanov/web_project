@@ -3,11 +3,17 @@
     font-family: sans-serif;
 
     color: #101010;
+
+}
+
+body {
+    margin: 0;
 }
 
 .auth-block__div {
     width: 80%;
     margin: auto;
+    margin-top: 240px;
 }
 
 .auth-block__div > .auth-form__form {

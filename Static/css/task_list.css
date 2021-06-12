@@ -3,6 +3,15 @@
     font-family: sans-serif;
 
     color: #101010;
+
+}
+
+body {
+    margin: 0;
+}
+
+.main-block {
+    margin-top: 120px;
 }
 
 .ls-task-list {
