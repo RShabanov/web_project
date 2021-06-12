@@ -147,8 +147,7 @@ import {Task} from './modules/task_form_module.js';
             });
         } else if (taskStatus === 'all') {
             taskList.forEach(task => {
-                if (task.firstElementChild.dataset.deleted === '0' &&
-                    filterTime(task.querySelector('.ls-time-field').innerText.trim())) {
+                if (filterTime(task.querySelector('.ls-time-field').innerText.trim())) {
                     taskListForm.appendChild(task);
                 }
             });
