@@ -48,14 +48,22 @@ class Register extends BaseModel {
             }
 
             if ($sql->execute($data)) {
-                $users = static::get_all_users();
-                $this->user_id = count($users);
+                $user = $this->get_user_by_name($this->name);
+                $this->user_id = $user['id'];
                 return true;
             }
             else {
                 $this->errors['registration'] = 'The user with this name already exists';
             }
 
+        }
+        return false;
+    }
+
+    private function get_user_by_name($name) {
+        $sql = static::get_db()->prepare('SELECT * FROM `' . static::$table . '` WHERE `name`=:name LIMIT 1;');
+        if ($sql->execute([':name' => $name])) {
+            return $sql->fetch(PDO::FETCH_ASSOC);
         }
         return false;
     }
