@@ -28,15 +28,8 @@ class Router {
                 $controller_file = ROOT . '/App/Controllers/' . $controller_name . '.php';
                 $controller_name = 'App\Controllers\\' . $controller_name;
 
-                echo 'Class: ' . $controller_name . '<br>';
-                echo 'Action: ' . $action_name . '<br>';
-                echo 'File: ' . $controller_file . '<br><br>';
-
                 if (file_exists($controller_file)) {
                     $request = new Request;
-
-                    echo 'Request method: ' . $request->method() . '<br>';
-                    echo '$_SERVER[REQUEST_METHOD]: ' . $_SERVER['REQUEST_METHOD'] . '<br>';
 
                     $controller = new $controller_name($request);
                     $controller->$action_name();

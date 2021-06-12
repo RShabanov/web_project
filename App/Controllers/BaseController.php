@@ -13,8 +13,6 @@ class BaseController {
     public function __construct(Request $request) {
         $this->request = $request;
 
-        echo 'Is authorized: ' . Session::is_authorized() . '<br>';
-
         if (!Session::is_authorized() &&
             !preg_match('/AuthController$/', static::class) &&
             !preg_match('/RegisterController$/', static::class)) {

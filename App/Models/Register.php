@@ -51,7 +51,6 @@ class Register extends BaseModel {
                 return true;
             }
             else {
-                print_r($sql->errorInfo());
                 $this->errors['registration'] = 'The user with this name already exists';
             }
 

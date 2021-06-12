@@ -15,21 +15,15 @@ class AuthController extends BaseController {
         if (Session::is_authorized()) {
             $this->response()->redirect('tasks/list');
         }
-        echo '<br>AuthController -> action_login()<br>';
 
         $auth = new Auth;
         $auth->fill($this->request->post());
 
         if ($this->request->method() === 'POST') {
             if ($auth->match()) {
-                echo 'AuthController -> login(): successful<br>';
-                echo 'User_id: ' . $auth->user_id . '<br>';
                 Session::authorize($auth->user_id);
     
                 $this->response()->redirect('tasks/list');
-            }
-            else {
-                echo 'AuthController -> login(): failed';
             }
         }
 
