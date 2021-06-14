@@ -12,12 +12,6 @@ class BaseController {
 
     public function __construct(Request $request) {
         $this->request = $request;
-
-        if (!Session::is_authorized() &&
-            !preg_match('/AuthController$/', static::class) &&
-            !preg_match('/RegisterController$/', static::class)) {
-                $this->response()->redirect('login');
-        }
     }
 
     public function response() {

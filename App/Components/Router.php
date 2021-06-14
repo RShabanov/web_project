@@ -22,6 +22,12 @@ class Router {
         foreach ($this->routes as $uri_pattern => $path) {
             if (preg_match("~^$uri_pattern$~", $uri)) {
 
+                if (!Session::is_authorized() &&
+                    '/login' !== $uri_pattern &&
+                    '/create_account' !== $uri_pattern) {
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                }
+
                 $controller_name = ucfirst($path['controller']) . 'Controller';
                 $action_name = 'action_' . $path['action'];
                 
