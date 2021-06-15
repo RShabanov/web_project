@@ -7,13 +7,3 @@ spl_autoload_register(function($class) {
         require_once $path;
     }
 });
-
-function array_get($array, $key, $default = '') {
-    $array = (array)$array;
-    if (isset($array[$key]))
-    {
-        return $array[$key];
-    }
-
-    return $default;
-}
