@@ -11,12 +11,12 @@ use App\Session;
 
 class RegisterController extends BaseController {
 
-    public function __construct(Request $request) {        
+    public function __construct(Request $request) {  
+        parent::__construct($request);
+
         if (Session::is_authorized()) {
             $this->response()->redirect('tasks/list');
-        }
-        
-        parent::__construct($request);
+        }        
     }
 
     public function action_create_account() {
